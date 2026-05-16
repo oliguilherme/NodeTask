@@ -15,3 +15,12 @@ export async function createTask(dataTask: Task) {
   
   return task;
 }
+
+export async function listTasks() {
+  const tasks = await prisma.task.findMany({
+    orderBy: {id: "asc"}
+  });
+
+  return tasks;
+}
+

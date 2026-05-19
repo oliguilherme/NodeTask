@@ -16,7 +16,7 @@ export async function createTaskController(req: Request, res: Response) {
 export async function listTasksController(req: Request, res: Response) {
   try {
     const tasks = await listTasks();
-    res.status(200).json(tasks);
+    return res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao buscar tarefa' });
   }

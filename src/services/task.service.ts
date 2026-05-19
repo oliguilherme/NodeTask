@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { taskSchemaZod } from "../schemas/task.schemas.js";
+import { taskSchemaZod, idTaskSchemaZod } from "../schemas/task.schemas.js";
 import { prisma } from "../../lib/prisma.js";
 
 type Task = z.infer<typeof taskSchemaZod >
@@ -24,3 +24,15 @@ export async function listTasks() {
   return tasks;
 }
 
+
+export async function getTaskById(id: number) {
+  const task = await prisma.task.findUnique({
+    where: { id: id}
+  });
+
+  if (!task) {
+    throw new Error("Task not found!");
+  }
+  
+  return task;
+}

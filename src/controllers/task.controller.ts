@@ -9,8 +9,13 @@ export async function createTaskController(req: Request, res: Response) {
     return res.status(400).json({ errors: taskParse.error.flatten() });
   }
 
-  const task = await createTask(taskParse.data);
-  res.status(201).json(task);
+  try {
+    const task = await createTask(taskParse.data);
+    return res.status(201).json(task);
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+
 }
 
 export async function listTasksController(req: Request, res: Response) {

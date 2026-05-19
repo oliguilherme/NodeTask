@@ -15,7 +15,6 @@ export async function createTaskController(req: Request, res: Response) {
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
   }
-
 }
 
 export async function listTasksController(req: Request, res: Response) {

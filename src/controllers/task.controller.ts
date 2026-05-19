@@ -59,7 +59,7 @@ export async function updateTaskController(req: Request, res: Response) {
 export async function deleteTaskController(req: Request, res: Response) {
   try {
     const id = Number(req.params.id);
-    const task = deleteTask(id);
+    deleteTask(id);
     return res.status(204).send();
   } catch (error) {
     if (error instanceof Error) {

@@ -33,5 +33,6 @@ export async function getTaskById(id: number) {
   if (!task) {
     throw new Error("Task not found!");
   }
+  
   return task;
 }

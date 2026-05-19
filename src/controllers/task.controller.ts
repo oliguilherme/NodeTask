@@ -2,6 +2,13 @@ import { type Request, type Response } from "express";
 import { taskSchemaZod, idTaskSchemaZod } from "../schemas/task.schemas.js";
 import { createTask, listTasks, getTaskById, updateTask } from "../services/task.service.js";
 
+export const taskController = {
+  create: createTaskController,
+  list: listTasksController,
+  getTask: getTaskController,
+  update: updateTaskController
+}
+
 export async function createTaskController(req: Request, res: Response) {
 
   try {

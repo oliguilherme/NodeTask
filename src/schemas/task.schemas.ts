@@ -10,3 +10,9 @@ export const taskSchemaZod = z.object({
 export const idTaskSchemaZod = z.object({
   id: z.coerce.number().int().positive()
 });
+
+export const updateSchemaZod = z.object({
+  title: z.string().min(2).optional(),
+  done: z.boolean().optional(),
+  priority: z.enum(Priority).optional()
+});

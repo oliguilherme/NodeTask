@@ -1,8 +1,8 @@
 import * as z from 'zod';
-import { taskSchemaZod, idTaskSchemaZod } from "../schemas/task.schemas.js";
+import { taskSchemaZod, idTaskSchemaZod, updateSchemaZod } from "../schemas/task.schemas.js";
 import { prisma } from "../../lib/prisma.js";
 
-type Task = z.infer<typeof taskSchemaZod >
+type Task = z.infer< typeof taskSchemaZod >
 
 export async function createTask(dataTask: Task) {
   const task = await prisma.task.create({
@@ -35,4 +35,28 @@ export async function getTaskById(id: number) {
   }
   
   return task;
+}
+
+type UpdateTask = z.infer< typeof updateSchemaZod >
+
+export async function updateTask(id: number, data: UpdateTask ) {
+  console.log("buscando tarefa");
+  const exists = await getTaskById(id);
+  console.log("\ntarefa encontrada");
+
+  if (!exists) {
+    throw new Error("Task not found!");
+  }
+  console.log("\natualizando tarefa");
+  const taskUpdated = prisma.task.update({
+    where: { id },
+    data: {
+      //se a primeira condicção é verdadeira, entao o data.tile é acrescentado ao objeto
+      ...(data.title !== undefined && { title: data.title }), 
+      ...(data.done !== undefined && { done: data.done }),
+      ...(data.priority !== undefined && { priority: data.priority })
+    }
+  });
+  console.log("\ntarefa atuliazad");
+  return taskUpdated;
 }

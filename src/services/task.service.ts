@@ -42,9 +42,6 @@ type UpdateTask = z.infer< typeof updateSchemaZod >
 export async function updateTask(id: number, data: UpdateTask ) {
   const exists = await getTaskById(id);
 
-  if (!exists) {
-    throw new Error("Task not found!");
-  }
   const taskUpdated = prisma.task.update({
     where: { id },
     data: {
@@ -54,5 +51,17 @@ export async function updateTask(id: number, data: UpdateTask ) {
       ...(data.priority !== undefined && { priority: data.priority })
     }
   });
+
   return taskUpdated;
+}
+
+export async function deleteTask(id: number) {
+  const exists = getTaskById(id);
+  const taskDeleted = prisma.task.delete({
+    where: {
+      id: id
+    },
+  });
+
+  return taskDeleted;
 }

@@ -9,5 +9,6 @@ taskRouter.post("/create", validateZod(taskSchemaZod, 'body'), taskController.cr
 taskRouter.get("/list", taskController.list);
 taskRouter.get("/get/:id", validateZod(idTaskSchemaZod, 'params'), taskController.getTask);
 taskRouter.patch("/update/:id", validateZod(idTaskSchemaZod, 'params'), validateZod(updateSchemaZod, 'body'), taskController.update);
+taskRouter.delete("/delete/:id", validateZod(idTaskSchemaZod, 'params'), taskController.delete);
 
 export default taskRouter;

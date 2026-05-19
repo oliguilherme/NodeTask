@@ -43,8 +43,6 @@ export async function getTaskController(req: Request, res: Response) {
 }
 
 export async function updateTaskController(req: Request, res: Response) {
-   console.log('params:', req.params);
-    console.log('body:', req.body);
   try {
     const id = Number(req.params.id);
     const task = await updateTask(id, req.body);

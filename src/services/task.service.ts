@@ -40,14 +40,11 @@ export async function getTaskById(id: number) {
 type UpdateTask = z.infer< typeof updateSchemaZod >
 
 export async function updateTask(id: number, data: UpdateTask ) {
-  console.log("buscando tarefa");
   const exists = await getTaskById(id);
-  console.log("\ntarefa encontrada");
 
   if (!exists) {
     throw new Error("Task not found!");
   }
-  console.log("\natualizando tarefa");
   const taskUpdated = prisma.task.update({
     where: { id },
     data: {
@@ -57,6 +54,5 @@ export async function updateTask(id: number, data: UpdateTask ) {
       ...(data.priority !== undefined && { priority: data.priority })
     }
   });
-  console.log("\ntarefa atuliazad");
   return taskUpdated;
 }

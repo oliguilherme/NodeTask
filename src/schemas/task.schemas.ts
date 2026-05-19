@@ -7,4 +7,6 @@ export const taskSchemaZod = z.object({
   priority: z.enum(Priority).default(Priority.LOW)
 });
 
-export const idTaskSchemaZod = z.coerce.number().int().positive();
+export const idTaskSchemaZod = z.object({
+  id: z.coerce.number().int().positive()
+});

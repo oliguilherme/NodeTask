@@ -38,7 +38,7 @@ export async function getTaskController(req: Request, res: Response) {
     if (error instanceof Error) {
       return res.status(404).json({ error: error.message });
     }
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
 
@@ -51,6 +51,6 @@ export async function updateTaskController(req: Request, res: Response) {
     if (error instanceof Error) {
       return res.status(404).json( {error: error.message });
     }
-    return res.status(500).json( {error: "Internal server error "});
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
